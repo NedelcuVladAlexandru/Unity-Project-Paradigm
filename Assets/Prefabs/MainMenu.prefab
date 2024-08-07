@@ -522,7 +522,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8977649032638313562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590162326130576272}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &7192117630407787079
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +668,7 @@ GameObject:
   - component: {fileID: 388572162328925542}
   - component: {fileID: 3722815760885337911}
   - component: {fileID: 7632401182800316302}
+  - component: {fileID: 590162326130576272}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -750,6 +763,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &590162326130576272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257321284717510929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3fdf866bee8ca94ba9d46f7a18c3d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7427937207152188458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,4 +1104,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 192874401839218728}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590162326130576272}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
