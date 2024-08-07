@@ -4,7 +4,6 @@ using System.Collections;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public string targetSceneName; // TODO: Change this so it can dynamically go between 2-3 scenes.
     public GameObject player; // Reference to the Player GameObject
 
     private Vector3 savedPosition;
@@ -14,29 +13,36 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SwitchScene(targetSceneName);
+            Scene currentScene = SceneManager.GetActiveScene();
+            int currentSceneInt = currentScene.buildIndex;
+
+            // Protection for going over existing number of scenes
+            int nextSceneBuildIndex = (currentSceneInt + 1) % SceneManager.sceneCountInBuildSettings;
+
+            SwitchScene(nextSceneBuildIndex);
         }
     }
 
-    public void SwitchScene(string sceneName)
+    public void SwitchScene(int SceneBuildIndex)
     {
-        StartCoroutine(TransitionScene(sceneName));
+        StartCoroutine(TransitionScene(SceneBuildIndex));
     }
 
-    private IEnumerator TransitionScene(string sceneName)
+    private IEnumerator TransitionScene(int SceneBuildIndex)
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         // Save player transform data
         SavePlayerTransform();
 
         // Load new scene additively
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneBuildIndex, LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
         // Unload previous scene
-        string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.UnloadSceneAsync(currentSceneName);
 
         // Restore player transform data
