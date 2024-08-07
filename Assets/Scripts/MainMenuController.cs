@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    public GameObject settingsPanel;
+
     // Loads the main scene of the title
     public void StartGame()
     {
@@ -12,7 +14,8 @@ public class MainMenuController : MonoBehaviour
 
     public void OpenSettings()
     {
-        
+        settingsPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void QuitGame()
