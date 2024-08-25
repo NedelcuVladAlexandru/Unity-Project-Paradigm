@@ -8,48 +8,61 @@ public class SettingsMenuController : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     public GameObject mainMenu;
     private Resolution[] resolutions;
+    private List<string> options = new List<string>();
+    private List<int> resolutionIndices = new List<int>();
 
     void Start()
     {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
+        InitializeResolutionOptions();
+    }
 
-        List<string> options = new List<string>();
+    private void InitializeResolutionOptions()
+    {
+        // Clear the dropdown options and ensure no duplicates
+        resolutionDropdown.ClearOptions();
+        options.Clear();
+        resolutionIndices.Clear();
+
+        // Get all available screen resolutions
+        resolutions = Screen.resolutions;
         int currentResolutionIndex = 0;
 
-        // Populate dropdown with available resolutions
+        // Dictionary to ensure we only add unique resolutions
+        Dictionary<string, int> uniqueResolutions = new Dictionary<string, int>();
+
+        // Populate the dropdown with available resolutions
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
 
-            // Check if this is the current resolution
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            // Add only unique resolutions and ensure they are for the current display
+            if (!uniqueResolutions.ContainsKey(option))
             {
-                currentResolutionIndex = i;
+                uniqueResolutions[option] = i;
+                options.Add(option);
+                resolutionIndices.Add(i);
+
+                // Check if this resolution is the current screen resolution
+                if (resolutions[i].width == Screen.currentResolution.width &&
+                    resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResolutionIndex = options.Count - 1;
+                }
             }
         }
 
-        resolutionDropdown.AddOptions(options); 
+        resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
 
-    private void Update()
+    public void SetResolution(int dropdownIndex)
     {
-        if (Input.GetKeyUp(KeyCode.Escape)) 
-        {
-            SetResolution(resolutionDropdown.value);
-        }
-    }
-
-    public void SetResolution(int resolutionIndex)
-    {
+        int resolutionIndex = resolutionIndices[dropdownIndex];
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
-        AdjustCameraViewport(); 
+        AdjustCameraViewport();
     }
 
     private void AdjustCameraViewport()
