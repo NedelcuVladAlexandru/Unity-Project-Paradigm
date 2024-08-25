@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ResolutionSettings : MonoBehaviour
 {
+    public TMP_Dropdown screenModeDropdown;
     public TMP_Dropdown resolutionDropdown;
     private Resolution[] resolutions;
     private List<string> options = new List<string>();
@@ -54,7 +55,19 @@ public class ResolutionSettings : MonoBehaviour
     {
         int resolutionIndex = resolutionIndices[dropdownIndex];
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        switch (screenModeDropdown.value)
+        {
+            case 0: // Fullscreen
+                Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.FullScreenWindow);
+                break;
+            case 1: // Borderless Windowed
+                Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.FullScreenWindow);
+                break;
+            case 2: // Windowed
+                Screen.SetResolution(resolution.width, resolution.height, FullScreenMode.Windowed);
+                break;
+        }
 
         AdjustCameraViewport();
     }

@@ -5,18 +5,28 @@ using System.Collections.Generic;
 
 public class SettingsMenuController : MonoBehaviour
 {
-    public TMP_Dropdown resolutionDropdown;
     public ResolutionSettings resolutionSettings;
+    public ScreenTypeSettings screenTypeSettings;
     public GameObject mainMenu;
 
-    void Start()
+    private void Start()
     {
         resolutionSettings.InitializeResolutionOptions();
+        screenTypeSettings.InitializeScreenModeOptions();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            BackToMainMenu(); // Allowing the user to return from Settings with escape.
+        }
     }
 
     public void ApplySettings()
     {
-        resolutionSettings.SetResolution(resolutionDropdown.value);
+        screenTypeSettings.SetScreenMode(screenTypeSettings.screenModeDropdown.value);
+        resolutionSettings.SetResolution(resolutionSettings.resolutionDropdown.value);
     }
 
     public void BackToMainMenu()
