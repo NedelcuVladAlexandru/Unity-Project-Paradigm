@@ -4,11 +4,6 @@ using System.Collections;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public GameObject player; // Reference to the Player GameObject
-
-    private Vector3 savedPosition;
-    private Quaternion savedRotation;
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -29,41 +24,29 @@ public class SceneSwitcher : MonoBehaviour
         }
     }
 
-    public void SwitchScene(int SceneBuildIndex)
+    public void SwitchScene(int sceneBuildIndex)
     {
-        StartCoroutine(TransitionScene(SceneBuildIndex));
+        StartCoroutine(TransitionScene(sceneBuildIndex));
     }
 
-    private IEnumerator TransitionScene(int SceneBuildIndex)
+    private IEnumerator TransitionScene(int sceneBuildIndex)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        // Save player transform data
-        SavePlayerTransform();
-
-        // Load new scene additively
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneBuildIndex, LoadSceneMode.Additive);
+        // Load the new scene additively
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneBuildIndex, LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        // Unload previous scene
-        SceneManager.UnloadSceneAsync(currentSceneName);
+        // Unload the previous scene
+        Scene currentScene = SceneManager.GetActiveScene();
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(currentScene.buildIndex);
+        while (!asyncUnload.isDone)
+        {
+            yield return null;
+        }
 
-        // Restore player transform data
-        RestorePlayerTransform();
-    }
-
-    private void SavePlayerTransform()
-    {
-        savedPosition = player.transform.position;
-        savedRotation = player.transform.rotation;
-    }
-
-    private void RestorePlayerTransform()
-    {
-        player.transform.position = savedPosition;
-        player.transform.rotation = savedRotation;
+        // Ensure player is correctly instantiated in the new scene
+        PlayerManager.Instance.GetPlayer().SetActive(true); // Ensure the player remains active
     }
 }

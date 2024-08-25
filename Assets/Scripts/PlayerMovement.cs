@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public float sprintMultiplier = 1.5f;
     public float speed = 5.0f;
     public float mouseSensitivity = 100.0f;
 
@@ -34,6 +35,14 @@ public class PlayerMovement : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        characterController.Move(speed * Time.deltaTime * move);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            characterController.Move(speed * sprintMultiplier * Time.deltaTime * move);
+        }
+        else
+        { 
+            characterController.Move(speed * Time.deltaTime * move); 
+        }
     }
 }
