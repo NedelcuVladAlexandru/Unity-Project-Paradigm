@@ -19,6 +19,12 @@ public class SceneSwitcher : MonoBehaviour
             // Protection for going over existing number of scenes
             int nextSceneBuildIndex = (currentSceneInt + 1) % SceneManager.sceneCountInBuildSettings;
 
+            // Protection from switching to the BootStrap scene
+            if (nextSceneBuildIndex == 0)
+            {
+                nextSceneBuildIndex++;
+            }
+
             SwitchScene(nextSceneBuildIndex);
         }
     }

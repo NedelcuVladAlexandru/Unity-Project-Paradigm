@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  mouseSensitivity: 70
+  mouseSensitivity: 100
 --- !u!143 &5581826498631239282
 CharacterController:
   m_ObjectHideFlags: 0
@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a42cc511fb58754d99f1ffde3db98f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: AlternateScene
   player: {fileID: 85972356045418902}
 --- !u!1 &8834277915125728578
 GameObject:
