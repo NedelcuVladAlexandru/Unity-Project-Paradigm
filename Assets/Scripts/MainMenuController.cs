@@ -1,10 +1,20 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     public GameObject settingsPanel;
+
+    public void Start()
+    {
+        // Load the saved language index or default to 0 (English)
+        int savedLanguageIndex = PlayerPrefs.GetInt("SelectedLanguage", 0);
+
+        // Set the localization based on saved preference
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[savedLanguageIndex];
+    }
 
     // Loads the main scene of the title
     public void StartGame()

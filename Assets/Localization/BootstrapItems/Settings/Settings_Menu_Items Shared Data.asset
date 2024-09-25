@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Settings_Menu_Items Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Settings_Menu_Items
+  m_TableCollectionNameGuidString: f852bd9a711915e419da8086451a7baa
+  m_Entries:
+  - m_Id: 7677001728
+    m_Key: Key_Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24756207616
+    m_Key: Key_Screen_View
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28065513472
+    m_Key: Key_Languages
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3101726982144
+    m_Key: Key_Apply_All
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3144701820928
+    m_Key: Key_Back
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7489082136493817857
+  references:
+    version: 2
+    RefIds:
+    - rid: 7489082136493817857
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1727261677643

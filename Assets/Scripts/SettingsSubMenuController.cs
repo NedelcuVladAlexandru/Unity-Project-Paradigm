@@ -7,12 +7,14 @@ public class SettingsMenuController : MonoBehaviour
 {
     public ResolutionSettings resolutionSettings;
     public ScreenTypeSettings screenTypeSettings;
+    public LanguageSettings languageSettings;
     public GameObject mainMenu;
 
     private void Start()
     {
         resolutionSettings.InitializeResolutionOptions();
         screenTypeSettings.InitializeScreenModeOptions();
+        languageSettings.InitializeLanguageSettings();
     }
 
     private void Update()
@@ -26,7 +28,8 @@ public class SettingsMenuController : MonoBehaviour
     public void ApplySettings()
     {
         screenTypeSettings.SetScreenMode(screenTypeSettings.screenModeDropdown.value);
-        resolutionSettings.SetResolution(resolutionSettings.resolutionDropdown.value);
+        resolutionSettings.SetResolution(resolutionSettings.resolutionDropdown.value);        
+        languageSettings.ApplySelectedLanguage();
     }
 
     public void BackToMainMenu()
